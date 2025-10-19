@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ram Singh | Indian Curry Chef</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Main Container -->
+  <div class="min-h-screen flex flex-col md:flex-row">
+
+    <!-- Left Section -->
+    <aside class="md:w-1/3 bg-gray-900 text-white p-8 flex flex-col items-center">
+      <img id="profilePhoto" src="chef-photo.jpg" alt="Ram Singh" class="w-40 h-40 rounded-xl border-4 border-yellow-400 mb-6">
+      <h1 class="text-3xl font-bold mb-1">RAM SINGH</h1>
+      <p class="text-yellow-400 mb-8">Indian Curry Chef</p>
+      <button id="downloadCV" class="bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold hover:bg-yellow-300">
+        Download CV
+      </button>
+      <br>
+
+      <div class="w-full">
+        <h2 class="text-xl font-semibold border-b border-yellow-400 pb-1 mb-3">CONTACT</h2>
+        <p class="text-sm"><strong>📞</strong> +91 9548073038</p>
+        <p class="text-sm"><strong>📧</strong> sambhandari909@gmail.com</p>
+        <p class="text-sm"><strong>🎂</strong> 05/08/2003</p>
+        <p class="text-sm"><strong>🏠</strong> House no-115, Village Timli,<br> Post Timli, Tehri Garhwal,<br> Uttarakhand 249192</p>
+      </div>
+
+      <div class="w-full mt-8">
+        <h2 class="text-xl font-semibold border-b border-yellow-400 pb-1 mb-3">EDUCATION</h2>
+        <p class="text-sm"><strong>High School</strong><br> Govt. Inter College Timli, 2018</p>
+        <p class="text-sm mt-3"><strong>Higher Secondary</strong><br> Govt. Inter College Timli, 2020</p>
+      </div>
+
+      <div class="w-full mt-8">
+        <h2 class="text-xl font-semibold border-b border-yellow-400 pb-1 mb-3">SKILLS</h2>
+        <ul class="list-disc list-inside text-sm space-y-1">
+          <li>Communication</li>
+          <li>Leadership</li>
+          <li>Creativity</li>
+        </ul>
+      </div>
+
+      <div class="w-full mt-8">
+        <h2 class="text-xl font-semibold border-b border-yellow-400 pb-1 mb-3">LANGUAGES</h2>
+        <p class="text-sm">English</p>
+        <p class="text-sm">Hindi</p>
+      </div>
+    </aside>
+
+    <!-- Right Section -->
+    <main class="md:w-2/3 bg-white p-10">
+      
+      <!-- About Section -->
+      <section class="mb-10">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">About Me</h2>
+        <p class="text-gray-700 leading-relaxed">
+          I am an enthusiastic and passionate <strong>Indian Curry Chef</strong> with hands-on experience in
+          authentic Indian cuisine preparation, specializing in gravies, curries, and traditional Indian
+          flavors. I focus on maintaining high hygiene standards, teamwork, and guest satisfaction.
+          My goal is to grow as a professional chef and bring innovative taste and presentation to Indian dishes.
+        </p>
+      </section>
+
+      <!-- Experience Section -->
+      <section>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Experience</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="font-semibold text-xl text-gray-800">Pride Hotels & Resort Rishikesh</h3>
+            <p class="text-gray-600 text-sm">Indian 3rd Commi | 7 July 2023 – 11 Dec 2023</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-xl text-gray-800">Patilwada Restaurant, Pune</h3>
+            <p class="text-gray-600 text-sm">Indian 3rd Commi | 6 Jan 2024 – 10 May 2024</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-xl text-gray-800">The Fern An Ecotel Hotel, Lonavala</h3>
+            <p class="text-gray-600 text-sm">Indian 3rd Commi | 13 May 2024 – 31 March 2025</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-xl text-gray-800">The Fern An Ecotel Hotel, Lonavala</h3>
+            <p class="text-gray-600 text-sm">Indian 2nd Commi | 1 April 2025 – Present</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- JS: PDF Download -->
+  <script>
+    async function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF('p', 'mm', 'a4');
+
+      // Load photo
+      const imgElement = document.getElementById('profilePhoto');
+      const imageData = await toDataURL(imgElement.src);
+
+      // Header
+      doc.addImage(imageData, 'JPEG', 150, 10, 40, 40);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(22);
+      doc.text('Ram Singh', 20, 25);
+      doc.setFontSize(12);
+      doc.text('Indian Curry Chef', 20, 33);
+
+      // About
+      let y = 50;
+      doc.setFontSize(11);
+      doc.setFont('helvetica', 'bold');
+      doc.text('About Me', 20, y); y += 6;
+      doc.setFont('helvetica', 'normal');
+      doc.text('Enthusiastic Indian Curry Chef experienced in authentic Indian cuisine, focusing on quality, teamwork, and guest satisfaction.', 20, y, { maxWidth: 170 }); 
+      y += 20;
+
+      // Contact
+      doc.setFont('helvetica', 'bold'); doc.text('Contact Info:', 20, y); y += 6;
+      doc.setFont('helvetica', 'normal');
+      doc.text('Phone: +91 9548073038', 20, y); y += 6;
+      doc.text('Email: sambhandari909@gmail.com', 20, y); y += 6;
+      doc.text('DOB: 05/08/2003', 20, y); y += 6;
+      doc.text('Address: Village Timli, Post Timli, Tehri Garhwal, Uttarakhand 249192', 20, y); y += 10;
+
+      // Education
+      doc.setFont('helvetica', 'bold'); doc.text('Education', 20, y); y += 6;
+      doc.setFont('helvetica', 'normal');
+      doc.text('• High School — Govt. Inter College Timli (2018)', 20, y); y += 6;
+      doc.text('• Higher Secondary — Govt. Inter College Timli (2020)', 20, y); y += 10;
+
+      // Skills
+      doc.setFont('helvetica', 'bold'); doc.text('Skills', 20, y); y += 6;
+      doc.setFont('helvetica', 'normal');
+      doc.text('Communication, Leadership, Creativity', 20, y); y += 10;
+
+      // Experience
+      doc.setFont('helvetica', 'bold'); doc.text('Experience', 20, y); y += 6;
+      doc.setFont('helvetica', 'normal');
+      doc.text('• Pride Hotels & Resort Rishikesh — Indian 3rd Commi (Jul 2023 – Dec 2023)', 20, y); y += 6;
+      doc.text('• Patilwada Restaurant Pune — Indian 3rd Commi (Jan 2024 – May 2024)', 20, y); y += 6;
+      doc.text('• The Fern Ecotel Lonavala — Indian 3rd Commi (May 2024 – Mar 2025)', 20, y); y += 6;
+      doc.text('• The Fern Ecotel Lonavala — Indian 2nd Commi (Apr 2025 – Present)', 20, y); y += 10;
+
+      // Footer
+      doc.setFontSize(9);
+      doc.text(`Generated on ${new Date().toLocaleDateString()}`, 20, 290);
+
+      doc.save('Ram_Singh_CV.pdf');
+    }
+
+    async function toDataURL(url) {
+      const res = await fetch(url);
+      const blob = await res.blob();
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    document.getElementById('downloadCV').addEventListener('click', generatePDF);
+  </script>
+
+</body>
+</html>
